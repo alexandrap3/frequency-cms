@@ -8,18 +8,22 @@ You can try entering a URL like this directly into the browser. It does the same
 thing as filling in the form and pressing "Submit".
 -->
 
-<form action="/create">
-    
-    <!-- The "name" attribute determines the name of the attribute in the URL -->
-    Preposition <input type="text" name="preposition"><br>
-    
-    Noun <input type="text" name="noun"><br>
 
+<form action="/phrase/create">
+    
+<input type="hidden" name="frequency_id" id="textarea" value="{{frequency_id}}">
+
+        <!-- The "name" attribute determines the na
+        me of the attribute in the URL -->
+    
+<textarea name="sashatext" rows="20" cols="200">Write Here...</textarea>
+        <br><br>
     <!-- Here's the submit button -->
     <input type="submit"> 
     
     <!-- This is just a normal link back to the home page -->
-    <a href="/">Cancel</a>
+    <a  href="/">Cancel</a>
+    </form>
     
     <!--
     Available HTML tags for form fields:
@@ -29,4 +33,4 @@ thing as filling in the form and pressing "Submit".
     https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms
     -->
     
-</form>
+

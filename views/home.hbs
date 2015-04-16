@@ -1,28 +1,54 @@
-<p>
-    The temperature near Green Hall is {{temperature}} and the wind direction is from {{wind_direction}}°.
-</p>
-
-<p>
-    The next bus at York and Chapel is arriving {{arriving_in}} on route {{route}}.
-
-<div style="font-size:{{font_size}}pt; margin-left:{{margin}}pt;">
-
-    {{#each phrases}}
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<!--<meta id="myViewport" name="viewport" content="width=device-width" />-->
+<script>
     
-        <div>
-            <span style="display: inline-block; transform: rotate({{../wind_direction}}deg);">
-                <a href="/show?id={{id}}">Someone</a> is {{preposition}} {{noun}}
-            </span>
+
+</script>
+</head>
+
+ <ul class="nav">
+        <li class="left"><a href="/phrase/new?frequency_id={{latest_frequency_id}}">Continue Writing</a></li>
+        <li class="right"><a href="/frequency/new">New Frequency</a></li>
+              </ul>
+
+<div class="all-frequencies" style="width: {{total_width}}%;">
+
+    {{#each frequencies}}
+    
+        <div class="sashatext frequency frequency-{{@index}} interval-{{interval}} duration-{{duration}}" style="width: {{../frequency_width}}%; 
+            font-size: {{duration}}">
+            <p>Created on {{created}}
+            </p>
+            
+            {{#if completed}}
+                     <p class="completed">
+           Completed on {{completed}}
+            </p>
+                {{else}}
+                   <p> In process</p>
+                {{/if}}
+         
+            
+            <p>Every {{interval}} minutes for {{duration}} minutes</p><br>
+        
+            {{#each phrases}}
+                
+                {{#if sashatext}}
+                    {{sashatext}}
+                {{else}}
+                <div class="deleted">
+                    <img src="http://www.prwatch.org/files/images/sad_puppy.jpg" width=50px>
+                    <br>
+                    ——————</div>
+                {{/if}}
+                
+                <br>
+            {{/each}}
+            
         </div>
     
     {{/each}}
-    
+
 </div>
-
-<p>
-    <a href="/new">Add a phrase</a>
-</p>
-<p>
-    <a href="/about">About this site</a>
-</p>
-
