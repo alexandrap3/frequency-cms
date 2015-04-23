@@ -88,8 +88,7 @@ function clean() {
         
         // See if it should be completed now
         var will_be_completed_at = moment(frequency.created).add(frequency.duration, 'm');
-        if (will_be_completed_at.isAfter(moment())) {
-          console.log("Completing frequency", frequency.id);
+        if (moment().isAfter(will_be_completed_at)) {
           frequency.completed = Date.now();
           frequency.save(function(err) {
             if (err) {
