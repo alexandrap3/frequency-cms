@@ -66,6 +66,15 @@ FrequencySchema.methods.duration_and_interval = function() {
   message += moment.duration(this.duration, "minutes").humanize().replace(/^7 days$/, 'a week');
   return message;
 };
+// See http://momentjs.com/docs/#/displaying/format/ for format options
+FrequencySchema.methods.created_formatted = function() {
+  return moment(this.created).subtract(4, "hours").format("MMMM D, YYYY [at] h:mm a");
+}
+FrequencySchema.methods.completed_formatted = function() {
+  if (this.completed) {
+    return moment(this.completed).subtract(4, "hours").format("MMMM D, YYYY [at] h:mm a");
+  }
+}
 
 var Frequency = mongoose.model('Frequency', FrequencySchema);
 

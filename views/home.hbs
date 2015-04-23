@@ -20,12 +20,12 @@
     
         <div class="sashatext frequency frequency-{{@index}} interval-{{interval}} duration-{{duration}}" style="width: {{../frequency_width}}%; 
             font-size: {{duration}}">
-            <p>Created on {{created}}
+            <p>Created on {{created_formatted}}
             </p>
             
             {{#if completed}}
                      <p class="completed">
-           Completed on {{completed}}
+           Completed on {{completed_formatted}}
             </p>
                 {{else}}
                    <p> In process</p>
