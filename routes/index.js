@@ -43,9 +43,9 @@ mongoose.connect(process.env.MONGOLAB_URI || ('mongodb://' + process.env.IP + '/
 
 // A Frequency has many Phrases.
 
-var Phrases = new mongoose.Schema({
+var PhraseSchema = new mongoose.Schema({
   sashatext: {type: String},
-  created: { type : Date, default: Date.now }
+  created: {type : Date, default: Date.now}
 });
 
 var Frequency = mongoose.model('Frequency', {
@@ -56,7 +56,7 @@ var Frequency = mongoose.model('Frequency', {
   created: {type: Date, default: Date.now},
   updated: {type: Date, default: Date.now}, // Last time something was added OR deleted
   completed: {type: Date},
-  phrases: [Phrases]
+  phrases: [PhraseSchema]
  
 });
 
@@ -161,11 +161,16 @@ router.get('/', function(request, response, toss) {
     // If there's an error, tell Express to do its default behavior, which is show the error page.
     if (err) return toss(err);
     
-    // Find the most recent frequency. This will always be the one that gets added to.
-    if (frequencies[0]) {
-      var latest_frequency_id = frequencies[0].id;  
+    // Find the most recent active frequency. This will always be the one that gets added to.
+    var latest_frequency_id;
+    for (var i = 0; i < frequencies.length; i++) {
+      var frequency = frequencies[i];
+      if (!frequency.completed) {
+        latest_frequency_id = frequency.id;
+        break;
+      }
     }
-    
+
     var frequency_width = 100 / frequencies.length;
     if (frequency_width < 15) frequency_width = 15;
     

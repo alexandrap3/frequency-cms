@@ -7,10 +7,12 @@
 </script>
 </head>
 
- <ul class="nav">
-        <li class="left"><a href="/phrase/new?frequency_id={{latest_frequency_id}}">Continue Writing</a></li>
+  <ul class="nav">
+        {{#if latest_frequency_id}}
+            <li class="left"><a href="/phrase/new?frequency_id={{latest_frequency_id}}">Continue Writing</a></li>
+        {{/if}}
         <li class="right"><a href="/frequency/new">New Frequency</a></li>
-              </ul>
+  </ul>
 
 <div class="all-frequencies" style="width: {{total_width}}%;">
 
