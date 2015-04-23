@@ -29,7 +29,8 @@ module.exports = router;
 // database "networks". It will be created automatically if it doesn't already exist.
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.IP + '/networks');
+mongoose.connect(process.env.MONGOLAB_URI || ('mongodb://' + process.env.IP + '/networks'));
+//mongoose.connect('mongodb://' + process.env.IP + '/networks');
 
 
 
