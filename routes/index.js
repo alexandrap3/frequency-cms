@@ -48,7 +48,7 @@ var PhraseSchema = new mongoose.Schema({
   created: {type : Date, default: Date.now}
 });
 
-var Frequency = mongoose.model('Frequency', {
+var FrequencySchema = new mongoose.Schema({
   interval: {type: Number, required: true},
   duration: {type: Number, required: true},
   privacy: {type: String, required: true},
@@ -57,8 +57,17 @@ var Frequency = mongoose.model('Frequency', {
   updated: {type: Date, default: Date.now}, // Last time something was added OR deleted
   completed: {type: Date},
   phrases: [PhraseSchema]
- 
 });
+
+FrequencySchema.methods.duration_and_interval = function() {
+  var message = "Every "; 
+  message += moment.duration(this.interval, "minutes").humanize().replace(/^7 days$/, 'week').replace(/^a /, '');
+  message += " for ";
+  message += moment.duration(this.duration, "minutes").humanize().replace(/^7 days$/, 'a week');
+  return message;
+};
+
+var Frequency = mongoose.model('Frequency', FrequencySchema);
 
 
 
