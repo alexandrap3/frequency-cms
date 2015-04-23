@@ -16,7 +16,7 @@ thing as filling in the form and pressing "Submit".
         <!-- The "name" attribute determines the na
         me of the attribute in the URL -->
     
-<textarea name="sashatext" rows="20" cols="200">Write Here...</textarea>
+<textarea name="sashatext" id="sashatext" rows="20" cols="200" placeholder="Write Here..."></textarea>
         <br><br>
     <!-- Here's the submit button -->
     <input type="submit"> 
@@ -34,3 +34,6 @@ thing as filling in the form and pressing "Submit".
     -->
     
 
+<script>
+    document.getElementById("sashatext").focus();
+</script>
