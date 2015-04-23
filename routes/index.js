@@ -165,19 +165,15 @@ router.get('/', function(request, response, toss) {
       var latest_frequency_id = frequencies[0].id;  
     }
     
-     var frequency_width = 100 / frequencies.length;
-    var total_width = 100;
-    if (frequency_width < 15) {
-      frequency_width = 15;
-      total_width = frequency_width * frequencies.length;
-      frequency_width = 100 / total_width * frequency_width;
-    }
-   
+    var frequency_width = 100 / frequencies.length;
+    if (frequency_width < 15) frequency_width = 15;
+    
+    
     // The list of frequencies will be passed to the template.
     response.locals.frequencies = frequencies;
     response.locals.latest_frequency_id = latest_frequency_id;
     response.locals.frequency_width = frequency_width;
-    response.locals.total_width = total_width;
+    response.locals.total_width = frequency_width * frequencies.length;
     
     // layout tells template to wrap itself in the "layout" template (located in the "views" folder).
     response.locals.layout = 'layout';
