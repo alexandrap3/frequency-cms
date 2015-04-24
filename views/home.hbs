@@ -3,7 +3,21 @@
 <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 <!--<meta id="myViewport" name="viewport" content="width=device-width" />-->
 <script>
+function startTime() {
+    var today=new Date();
+    var h=today.getHours();
+    var m=today.getMinutes();
+    var s=today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML = h+":"+m+":"+s;
+    var t = setTimeout(function(){startTime()},500);
+}
 
+function checkTime(i) {
+    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
 </script>
 </head>
 
@@ -11,37 +25,45 @@
         {{#if latest_frequency_id}}
             <li class="left"><a href="/phrase/new?frequency_id={{latest_frequency_id}}">Continue Writing</a></li>
         {{/if}}
-        <li class="right"><a href="/frequency/new">New Frequency</a></li>
+            <li class="right"><a href="/frequency/new">New Frequency</a></li>
   </ul>
 
+<body onload="startTime()">
+<div id="txt" class="time-container" style = "z-index: -10">
+      </div>
+
+
 <div class="all-frequencies" style="width: {{total_width}}%;">
+
 
     {{#each frequencies}}
     
         <div class="sashatext frequency frequency-{{@index}} interval-{{interval}} duration-{{duration}}" style="width: {{../frequency_width}}%; 
-            font-size: {{duration}}">
-            <p>Created on {{created_formatted}}
-            </p>
-            
-            {{#if completed}}
-                     <p class="completed">
-           Completed on {{completed_formatted}}
-            </p>
-                {{else}}
-                   <p> In process</p>
+             font-size: {{duration}}; ">
+            <span style = "font-size: {{duration}}; color: gray; text-align: center;" class="info">
+                Created on {{created_formatted}}
+             </span><br>
+             
+             {{#if completed}}
+                      <span class="completed"  style = "font-size: {{duration}}; font-family: arial; color: gray; text-align: center;">
+         
+          Completed on {{completed_formatted}}
+             </span>
+                 {{else}}
+                    <span class = "info" style = "color: gray; font-size:{{duration}}; text-align: center;"> In process:
                 {{/if}}
             
-            <p>{{duration_and_interval}}</p><br>
-        
-            {{#each phrases}}
+            {{duration_and_interval}}</span><br><br>
+         
+             {{#each phrases}}
                 
                 {{#if sashatext}}
                     {{sashatext}}
                 {{else}}
                 <div class="deleted">
-                    <img src="http://www.prwatch.org/files/images/sad_puppy.jpg" width=50px>
+                    <img src="http://bert.art.yale.edu/~alexandraportis/interactive/unhappy.png" width=25px>
                     <br>
-                    ——————</div>
+                   </div>
                 {{/if}}
                 
                
